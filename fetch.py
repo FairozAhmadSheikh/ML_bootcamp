@@ -8,7 +8,11 @@ cur = conc.cursor()
 
 cur.execute("USE iust_employees")
 
-cur.execute("SELECT * FROM emp_details")
+# Select all
+# cur.execute("SELECT * FROM emp_details")
+
+# Select Specific
+cur.execute("select name,emp_id from emp_details")
 
 # Fetch all the results and print them
 result = cur.fetchall()
