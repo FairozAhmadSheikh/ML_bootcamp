@@ -64,3 +64,10 @@ def train(fake_dir, real_dir):
 
     preds = (model.predict(X_test) > 0.5).astype(int)
     print("\nClassification Report:\n", classification_report(y_test, preds))
+
+if __name__ == "__main__":
+    # Replace with actual folders
+    FAKE_AUDIO_DIR = "fake_audio/"
+    REAL_AUDIO_DIR = "real_audio/"
+    
+    train(FAKE_AUDIO_DIR, REAL_AUDIO_DIR)
