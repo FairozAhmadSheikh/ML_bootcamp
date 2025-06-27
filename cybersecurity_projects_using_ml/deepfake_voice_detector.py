@@ -53,3 +53,9 @@ def build_model(input_shape):
     ])
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     return model
+def train(fake_dir, real_dir):
+    print("Loading dataset...")
+    X, y = load_dataset(fake_dir, real_dir)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    
