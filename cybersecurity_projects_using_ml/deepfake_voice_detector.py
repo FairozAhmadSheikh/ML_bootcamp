@@ -53,9 +53,14 @@ def build_model(input_shape):
     ])
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     return model
+
 def train(fake_dir, real_dir):
     print("Loading dataset...")
     X, y = load_dataset(fake_dir, real_dir)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    
+    model = build_model(input_shape=X_train.shape[1:])
+    model.fit(X_train, y_train, epochs=10, batch_size=16, validation_split=0.1)
+
+    preds = (model.predict(X_test) > 0.5).astype(int)
+    print("\nClassification Report:\n", classification_report(y_test, preds))
