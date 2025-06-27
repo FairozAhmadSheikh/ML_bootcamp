@@ -45,4 +45,11 @@ def build_model(input_shape):
         MaxPooling2D((2, 2)),
         Conv2D(64, (3, 3), activation='relu'),
         MaxPooling2D((2, 2)),
-        
+        tf.keras.layers.Reshape((-1, 64)),  # flatten spatial into time steps
+        LSTM(64),
+        Dense(64, activation='relu'),
+        Dropout(0.3),
+        Dense(1, activation='sigmoid')
+    ])
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    return model
