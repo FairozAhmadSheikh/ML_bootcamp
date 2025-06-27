@@ -38,3 +38,11 @@ def load_dataset(fake_dir, real_dir, max_files=100):
             y.append(0)  # real
 
     return np.array(X), np.array(y)
+def build_model(input_shape):
+    model = Sequential([
+        tf.keras.layers.Reshape((input_shape[1], input_shape[0], 1), input_shape=input_shape),
+        Conv2D(32, (3, 3), activation='relu'),
+        MaxPooling2D((2, 2)),
+        Conv2D(64, (3, 3), activation='relu'),
+        MaxPooling2D((2, 2)),
+        
