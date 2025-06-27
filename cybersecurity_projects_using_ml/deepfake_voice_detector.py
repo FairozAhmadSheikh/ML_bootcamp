@@ -24,3 +24,10 @@ def extract_features(file_path, max_len=128):
     except Exception as e:
         print(f"Error loading {file_path}: {e}")
         return None
+def load_dataset(fake_dir, real_dir, max_files=100):
+    X, y = [], []
+    for file in os.listdir(fake_dir)[:max_files]:
+        features = extract_features(os.path.join(fake_dir, file))
+        if features is not None:
+            X.append(features)
+            y.append(1)  # fake
